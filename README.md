@@ -7,15 +7,17 @@ trained in a Jupyter notebook and saved as a `.sav` file.
 > ⚠️ **Disclaimer:** For educational purposes only. This is not a medical diagnosis.
 > Always consult a qualified doctor for health decisions.
 
-**Live demo:** _add your Streamlit Cloud link here_
+**Live demo:** diabetes-prediction-gmxmvccxgntybkpepo45iu.streamlit.app
 
 ## Features
+
 - Simple form to enter patient details
 - Instant prediction: diabetic or not diabetic
 - Input validation, so invalid or empty values show a friendly error
 - Model trained and evaluated in a documented notebook (`train.ipynb`)
 
 ## Project structure
+
 ```
 diabetes-prediction/
 ├── Diabetes_Prediction_Web_app.py     # Streamlit web app
@@ -29,31 +31,34 @@ diabetes-prediction/
 ```
 
 ## Dataset
+
 `data/diabetes_dataset_800_records.csv` contains **800 records** and 9 columns.
 
-| Column | Description |
-|---|---|
-| Pregnancies | Number of pregnancies |
-| Glucose | Glucose level |
-| BloodPressure | Blood pressure |
-| SkinThickness | Skin thickness |
-| Insulin | Insulin level |
-| BMI | Body mass index |
-| DiabetesPedigreeFunction | Family history score |
-| Age | Age in years |
-| **Diabetic** | **Target:** 0 = not diabetic, 1 = diabetic |
+| Column                   | Description                                |
+| ------------------------ | ------------------------------------------ |
+| Pregnancies              | Number of pregnancies                      |
+| Glucose                  | Glucose level                              |
+| BloodPressure            | Blood pressure                             |
+| SkinThickness            | Skin thickness                             |
+| Insulin                  | Insulin level                              |
+| BMI                      | Body mass index                            |
+| DiabetesPedigreeFunction | Family history score                       |
+| Age                      | Age in years                               |
+| **Diabetic**             | **Target:** 0 = not diabetic, 1 = diabetic |
 
 Class distribution: 704 diabetic (1) and 96 not diabetic (0).
 
 ## Model
-| Item | Value |
-|---|---|
-| Algorithm | Support Vector Machine (`SVC`, linear kernel) |
-| Train/test split | 70% / 30% (stratified, `random_state=42`) |
-| Training accuracy | 92.3% |
-| Test accuracy | 92.9% |
+
+| Item              | Value                                         |
+| ----------------- | --------------------------------------------- |
+| Algorithm         | Support Vector Machine (`SVC`, linear kernel) |
+| Train/test split  | 70% / 30% (stratified, `random_state=42`)     |
+| Training accuracy | 92.3%                                         |
+| Test accuracy     | 92.9%                                         |
 
 ### Limitations
+
 - The dataset is **imbalanced**: about 88% of the records are diabetic. A model that always
   predicted "diabetic" would already score 88% accuracy, so the 92.9% test accuracy is only
   a modest improvement over that baseline.
@@ -62,6 +67,7 @@ Class distribution: 704 diabetic (1) and 96 not diabetic (0).
 - This is a small dataset and a simple model, so predictions should not be relied on for real decisions.
 
 ## Run locally
+
 ```bash
 # 1. Install dependencies
 pip install -r requirements.txt
@@ -70,13 +76,13 @@ pip install -r requirements.txt
 streamlit run Diabetes_Prediction_Web_app.py
 ```
 
-The app opens in your browser at `http://localhost:8501`.
-
 ### Retrain the model (optional)
+
 Open `train.ipynb` in Jupyter or VS Code and run all cells. It reads the dataset from
 `data/` and saves the new model to `model/trained_model.sav`.
 
 ## How it works
+
 1. `train.ipynb` loads the dataset, splits it into training and test sets, trains an SVM, and
    saves it with `pickle` to `model/trained_model.sav`.
 2. The Streamlit app loads the saved model.
@@ -84,6 +90,7 @@ Open `train.ipynb` in Jupyter or VS Code and run all cells. It reads the dataset
 4. The model returns 0 (not diabetic) or 1 (diabetic), which is shown on screen.
 
 ## Deploy on Streamlit Community Cloud
+
 1. Push this folder to a GitHub repository (keep `model/trained_model.sav` included).
 2. Go to https://share.streamlit.io and sign in with GitHub.
 3. Select your repository and set the main file to `Diabetes_Prediction_Web_app.py`.
@@ -93,10 +100,5 @@ Open `train.ipynb` in Jupyter or VS Code and run all cells. It reads the dataset
 > so the saved model loads correctly.
 
 ## Tech stack
-Python, pandas, NumPy, scikit-learn, Streamlit, Jupyter Notebook
 
-## Possible improvements
-- Handle the class imbalance (class weights, resampling) and report precision, recall and F1
-- Compare more models such as Random Forest and Logistic Regression
-- Show prediction confidence
-- Replace text boxes with number inputs
+Python, pandas, NumPy, scikit-learn, Streamlit, Jupyter Notebook
